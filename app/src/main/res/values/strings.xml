@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Langmate</string>
+
+    <!--App global Strings-->
+    <string name="alert_dialog_are_you_sure_msg">Are you sure you want to exit?</string>
+    <string name="alert_dialog_are_you_sure_msg_yes">Yes</string>
+    <string name="alert_dialog_are_you_sure_msg_no">No</string>
+</resources>
