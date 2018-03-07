@@ -1,11 +1,13 @@
 package com.langmate.langmate.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import com.langmate.langmate.Activities.MainActivity
+import com.langmate.langmate.Activities.PersonDetailsActivity
 import com.langmate.langmate.Adapters.RadarAdapter
 import com.langmate.langmate.Models.RadarModel
 import com.langmate.langmate.R
@@ -69,5 +71,11 @@ class HomeFragment : MainBaseFragment() {
         gridView_Radar = v.findViewById(R.id.gridView_Radar)
 
 
+        gridView_Radar.setOnItemClickListener { parent, view, position, id ->
+
+            val i = Intent(activity, PersonDetailsActivity::class.java)
+            startActivity(i)
+
+         }
     }
 }

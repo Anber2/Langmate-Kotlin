@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "934227291611",
+    "firebase_url": "https://langmate-5e748.firebaseio.com",
+    "project_id": "langmate-5e748",
+    "storage_bucket": "langmate-5e748.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934227291611:android:5da16767f42cd666",
+        "android_client_info": {
+          "package_name": "com.langmate.langmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934227291611-q1kbqm8lup6r5takghm7qj8leqnf51ba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.langmate.langmate",
+            "certificate_hash": "9c56396314b062cde7dd4172d1a5b343efb11c70"
+          }
+        },
+        {
+          "client_id": "934227291611-drhqqitrdrpjt4mbdjc9508bmg0486un.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCalDls4G38f0Iu8xVspWsuSwg5zmbQiCE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934227291611-drhqqitrdrpjt4mbdjc9508bmg0486un.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
