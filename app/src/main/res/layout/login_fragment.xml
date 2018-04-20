@@ -9,11 +9,12 @@
 
     <ImageView
         android:id="@+id/ingView_FbLogin"
-        android:layout_width="240dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/fblogin" />
+
 
     <ImageView
         android:id="@+id/ingView_goglLogin"
@@ -21,13 +22,20 @@
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
 
+        android:visibility="gone"
         app:srcCompat="@drawable/login_google" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/textView_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
 
         android:text="New for Langmate? Register for free!"
         android:textColor="@android:color/holo_blue_light" />
@@ -36,5 +44,6 @@
         android:id="@+id/textView_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Skip to Home " />
 </LinearLayout>

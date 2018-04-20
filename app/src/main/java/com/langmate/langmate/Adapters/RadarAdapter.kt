@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.langmate.langmate.Models.RadarModel
 import com.langmate.langmate.R
+import com.squareup.picasso.Picasso
 import java.util.*
 
 /**
@@ -71,6 +72,13 @@ class RadarAdapter(internal var context: Context, //
         vh.age!!.text = radarModelArrayList[i].personAge
         vh.distance!!.text = radarModelArrayList[i].personDistance
         vh.locationName!!.text = radarModelArrayList[i].personLocationName
+
+
+
+        Picasso.with(this.context).load(radarModelArrayList[i].personImg).into(vh.personImg)
+
+
+
 
 
         return view

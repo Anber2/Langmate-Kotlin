@@ -16,10 +16,10 @@ import com.langmate.langmate.R
 import java.util.*
 
 /**
- * Created by HP on 2/27/2018.
+ * Created by HP on 3/31/2018.
  */
 
-class HomeFragment : MainBaseFragment() {
+class RadarFragment : MainBaseFragment() {
 
     internal lateinit var v: View
 
@@ -75,12 +75,18 @@ class HomeFragment : MainBaseFragment() {
 
                 radarModelArrayList.add(RadarModel(personId, "", personImg, name, personAge, "", personDistance, personLocationName))
             }
-
-            radarAdapter = RadarAdapter(context, radarModelArrayList)
-
-            gridView_Radar.adapter = radarAdapter
         }
 
+        /* radarModelArrayList.add(new RadarModel("0", "", "", "Name 1", "40", "", "20 mi", "(Tokyo)"));
+        radarModelArrayList.add(new RadarModel("1", "", "", "Name 2", "40", "", "20 mi", "(Tokyo)"));
+        radarModelArrayList.add(new RadarModel("2", "", "", "Name 3", "40", "", "20 mi", "(Tokyo)"));
+        radarModelArrayList.add(new RadarModel("3", "", "", "Name 4", "40", "", "20 mi", "(Tokyo)"));
+        radarModelArrayList.add(new RadarModel("4", "", "", "Name 5", "40", "", "20 mi", "(Tokyo)"));*/
+
+
+        radarAdapter = RadarAdapter(context, radarModelArrayList)
+
+        gridView_Radar.adapter = radarAdapter
 
     }
 

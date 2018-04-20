@@ -10,15 +10,16 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.langmate.langmate.Models.MatcheModel
 import com.langmate.langmate.R
 import kotlinx.android.synthetic.main.item_match.view.*
 
 /**
  * Created by HP on 3/1/2018.
  */
-class MatchAdapter(val context: Context, val data: List<Int>?) : BaseAdapter()  {
+class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAdapter() {
 
-    private val dataList = mutableListOf<Int>()
+    private val dataList = mutableListOf<MatcheModel>()
 
     init {
         if (data != null) {
@@ -30,7 +31,7 @@ class MatchAdapter(val context: Context, val data: List<Int>?) : BaseAdapter()  
         return dataList.size
     }
 
-    override fun getItem(position: Int): Int {
+    override fun getItem(position: Int): MatcheModel {
         return dataList[position]
     }
 
@@ -38,7 +39,7 @@ class MatchAdapter(val context: Context, val data: List<Int>?) : BaseAdapter()  
         return position.toLong()
     }
 
-    fun setData(data: List<Int>) {
+    fun setData(data: List<MatcheModel>) {
         dataList.clear()
         dataList.addAll(data)
         notifyDataSetChanged()
@@ -56,7 +57,7 @@ class MatchAdapter(val context: Context, val data: List<Int>?) : BaseAdapter()  
             holder = view.tag as DataViewHolder
         }
 
-        holder.bindData(context, getItem(position))
+        holder.bindData(context,  getItem(position) )
 
         return view
     }
@@ -66,13 +67,24 @@ class MatchAdapter(val context: Context, val data: List<Int>?) : BaseAdapter()  
      */
     class DataViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var picture = view.kolodaImage
+        var matchName = view.textView_matchName
+        var matchAge = view.textView_matchAge
+        var matchDistance = view.textView_matchDistance
+        var matchCity = view.text_matchCity
 
-        internal fun bindData(context: Context, data: Int) {
+        internal fun bindData(context: Context, data: MatcheModel) {
             val transforms = RequestOptions().transforms(CenterCrop(), RoundedCorners(20))
             Glide.with(context)
-                    .load(data)
+                    .load(data.matchImg)
                     .apply(transforms)
                     .into(picture)
+
+            matchName.setText(data.matchName)
+            matchAge.setText(data.matchAge)
+            matchDistance.setText(data.matchDistance)
+            matchCity.setText(data.matchLocationName)
+
+
         }
 
     }
