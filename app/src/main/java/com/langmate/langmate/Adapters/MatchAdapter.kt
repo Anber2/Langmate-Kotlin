@@ -1,6 +1,7 @@
 package com.langmate.langmate.Adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.langmate.langmate.Activities.MainActivity
 import com.langmate.langmate.Models.MatcheModel
 import com.langmate.langmate.R
 import kotlinx.android.synthetic.main.item_match.view.*
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.item_match.view.*
 class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAdapter() {
 
     private val dataList = mutableListOf<MatcheModel>()
+
 
     init {
         if (data != null) {
@@ -57,7 +60,26 @@ class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAda
             holder = view.tag as DataViewHolder
         }
 
-        holder.bindData(context,  getItem(position) )
+        holder.bindData(context, getItem(position))
+
+        try {
+            holder.dislike.setOnClickListener {
+
+                MainActivity.koloda.onClickLeft()
+
+                MainActivity.UpdateDisLikeUser(getItem(position).docId);
+
+
+
+            }
+            holder.like.setOnClickListener {
+                MainActivity.koloda.onClickRight()
+
+                MainActivity.UpdateLikeUser(getItem(position).docId);
+            }
+
+        } catch (e: Exception) {
+        }
 
         return view
     }
@@ -71,6 +93,9 @@ class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAda
         var matchAge = view.textView_matchAge
         var matchDistance = view.textView_matchDistance
         var matchCity = view.text_matchCity
+        var dislike = view.dislike_
+        var like = view.like_
+
 
         internal fun bindData(context: Context, data: MatcheModel) {
             val transforms = RequestOptions().transforms(CenterCrop(), RoundedCorners(20))
@@ -85,7 +110,14 @@ class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAda
             matchCity.setText(data.matchLocationName)
 
 
+            if (data.isLike.equals("true")) {
+
+                like.setBackgroundColor(Color.RED)
+            }
+
+
         }
 
     }
 }
+

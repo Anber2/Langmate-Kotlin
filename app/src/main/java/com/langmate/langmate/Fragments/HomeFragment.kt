@@ -76,7 +76,9 @@ class HomeFragment : MainBaseFragment() {
                 radarModelArrayList.add(RadarModel(personId, "", personImg, name, personAge, "", personDistance, personLocationName))
             }
 
-            radarAdapter = RadarAdapter(context, radarModelArrayList)
+            if (context != null) {
+                radarAdapter = RadarAdapter(context, radarModelArrayList)
+            }
 
             gridView_Radar.adapter = radarAdapter
         }

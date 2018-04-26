@@ -1,9 +1,6 @@
 package com.langmate.langmate.Fragments
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -14,16 +11,13 @@ import android.view.ViewTreeObserver
 import android.widget.ImageButton
 import android.widget.RelativeLayout
 import com.google.firebase.firestore.FirebaseFirestore
+import com.langmate.langmate.Activities.MainActivity
 import com.langmate.langmate.Activities.MainActivity.Companion.topBar_txt
 import com.langmate.langmate.Adapters.MatchAdapter
 import com.langmate.langmate.Models.MatcheModel
 import com.langmate.langmate.R
-import com.yalantis.library.Koloda
 import com.yalantis.library.KolodaListener
 import kotlinx.android.synthetic.main.match_fragment.*
-import java.io.IOException
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 /**
@@ -31,9 +25,10 @@ import java.net.URL
  */
 public class MatchFragment : MainBaseFragment() {
 
-    internal lateinit var v: View
 
-    internal lateinit var koloda: Koloda
+   internal lateinit var v: View
+
+     //internal lateinit var koloda: Koloda
 
     internal lateinit var dislike: ImageButton
     internal lateinit var like: ImageButton
@@ -68,7 +63,7 @@ public class MatchFragment : MainBaseFragment() {
 
         topBar_txt.visibility = View.INVISIBLE
 
-        koloda = v.findViewById(R.id.koloda)
+       MainActivity.koloda = v.findViewById(R.id.koloda)
 
         dislike = v.findViewById(R.id.dislike)
 
@@ -109,7 +104,7 @@ public class MatchFragment : MainBaseFragment() {
      */
     private fun initializeDeck() {
 
-        koloda.kolodaListener = object : KolodaListener {
+        MainActivity.koloda.kolodaListener = object : KolodaListener {
 
             internal var cardsSwiped = 0
 
@@ -145,7 +140,11 @@ public class MatchFragment : MainBaseFragment() {
                 Log.d("onEvent", "Error: " + e.message)
             }
 
+
+
             for (doc in documentSnapshots) {
+
+                val docId = doc.id
 
                 val name = doc.getString("name")
                 val personAge = doc.getString("personAge")
@@ -153,15 +152,18 @@ public class MatchFragment : MainBaseFragment() {
                 val personId = doc.getString("personId")
                 val personImg = doc.getString("personImg")
                 val personLocationName = doc.getString("personLocationName")
+                val isLike = doc.getString("isLike")
 
 
-                matcheImg.add(MatcheModel(personId, name, personAge, personDistance, personImg, personLocationName))
+                matcheImg.add(MatcheModel(docId,personId, name, personAge, personDistance, personImg, personLocationName,isLike ))
 
 
             }
-            adapter = MatchAdapter(activity, matcheImg)
-            koloda.adapter = adapter
-            koloda.isNeedCircleLoading = true
+            if (activity != null) {
+                adapter = MatchAdapter(context, matcheImg)
+                MainActivity.koloda.adapter = adapter
+                MainActivity.koloda.isNeedCircleLoading = true
+            }
 
 
         }
@@ -180,15 +182,7 @@ public class MatchFragment : MainBaseFragment() {
         like.setOnClickListener { koloda.onClickRight() }
     }
 
-    @Throws(IOException::class)
-    fun drawableFromUrl(url: String): Drawable {
-        val x: Bitmap
 
-        val connection = URL(url).openConnection() as HttpURLConnection
-        connection.connect()
-        val input = connection.getInputStream()
 
-        x = BitmapFactory.decodeStream(input)
-        return BitmapDrawable(x)
-    }
+
 }

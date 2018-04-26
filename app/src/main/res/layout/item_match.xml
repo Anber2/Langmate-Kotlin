@@ -78,6 +78,48 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <RelativeLayout
+            android:id="@+id/btons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            >
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/msg_match" />
+
+            <ImageButton
+                android:id="@+id/like_"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/imageButton"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_like_match" />
+
+            <ImageButton
+                android:id="@+id/dislike_"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/imageButton"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/ic_dislike_match"
+                />
+        </RelativeLayout>
+
+
 
 
     </RelativeLayout>
