@@ -12,13 +12,13 @@ import android.widget.Toast
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.langmate.langmate.AppConstants.AppConstants
 import com.langmate.langmate.Fragments.*
 import com.langmate.langmate.R
+import com.langmate.langmate.Utilities.SharedPrefsUtils
 import com.yalantis.library.Koloda
-
-
-
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -53,16 +53,20 @@ class MainActivity : MainBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        AppConstants.userId = SharedPrefsUtils.getUserDocId(mainBaseActivity)
+        AppConstants.userName = SharedPrefsUtils.getUserName(mainBaseActivity)
+
         initView()
         mAuth = FirebaseAuth.getInstance()
 
-      /*  mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-            if (firebaseAuth.currentUser == null) {
 
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                finish()
-             }
-        }*/
+        /*  mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+              if (firebaseAuth.currentUser == null) {
+
+                  startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                  finish()
+               }
+          }*/
 
 
         val pushFrag = MainBaseActivity()
@@ -101,7 +105,6 @@ class MainActivity : MainBaseActivity() {
                 super.onBackPressed()
 
 
-
         } catch (xx: Exception) {
             Log.e("onBackPressed Exception", "  " + xx)
         }
@@ -120,23 +123,37 @@ class MainActivity : MainBaseActivity() {
 
             db = FirebaseFirestore.getInstance();
 
+            val likeMeDate = HashMap<String, Any>()
 
-            val contact = db!!.collection("users").document(item)
-            contact.update("isLike", "true").addOnSuccessListener(OnSuccessListener<Void> {
-                Toast.makeText(mainBaseActivity,"Like Updated.", Toast.LENGTH_SHORT).show()
-            })
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+            likeMeDate.put("date", date)
+            likeMeDate.put("name", AppConstants.userName)
+            likeMeDate.put("personAge", "25")
+            likeMeDate.put("personDistance", "125")
+            likeMeDate.put("personId", AppConstants.userId!!)
+            likeMeDate.put("personImg", "https://cdn1.iconfinder.com/data/icons/business-charts/512/customer-256.png")
+            likeMeDate.put("personLocationName", "Tokyo")
+
+
+
+            db!!.collection("users").document(item!!).collection("likedMe").document(AppConstants.userId!!).set(likeMeDate)
+
+                    .addOnSuccessListener(OnSuccessListener<Void> {
+                        Toast.makeText(mainBaseActivity, "Like Updated.", Toast.LENGTH_SHORT).show()
+                    })
 
         }
 
         fun UpdateDisLikeUser(item: String) {
 
-            db = FirebaseFirestore.getInstance();
+            /* db = FirebaseFirestore.getInstance();
 
 
-            val contact = db!!.collection("users").document(item)
-            contact.update("isLike", "false").addOnSuccessListener(OnSuccessListener<Void> {
-                Toast.makeText(mainBaseActivity,"Dislike Updated.", Toast.LENGTH_SHORT).show()
-            })
+             val contact = db!!.collection("users").document(item)
+             contact.update("isLike", "false").addOnSuccessListener(OnSuccessListener<Void> {
+                 Toast.makeText(mainBaseActivity,"Dislike Updated.", Toast.LENGTH_SHORT).show()
+             })*/
 
         }
 
@@ -153,6 +170,9 @@ class MainActivity : MainBaseActivity() {
         topBar_txt = findViewById(R.id.topBar_txt)
         //TextView
         logout_txts = findViewById(R.id.logout_txts)
+
+        topBar_txt.visibility = View.VISIBLE
+
 
         //on Click
         liner_people.setOnClickListener(View.OnClickListener {
@@ -250,7 +270,6 @@ class MainActivity : MainBaseActivity() {
             mAuth.signOut()
             finish()
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-
 
 
         }

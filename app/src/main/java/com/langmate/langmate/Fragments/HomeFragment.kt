@@ -11,9 +11,12 @@ import android.widget.GridView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.langmate.langmate.Activities.PersonDetailsActivity
 import com.langmate.langmate.Adapters.RadarAdapter
+import com.langmate.langmate.AppConstants.AppConstants
 import com.langmate.langmate.Models.RadarModel
 import com.langmate.langmate.R
 import java.util.*
+
+
 
 /**
  * Created by HP on 2/27/2018.
@@ -33,6 +36,10 @@ class HomeFragment : MainBaseFragment() {
 
     //FireBase
     internal lateinit var firebaseFirestore: FirebaseFirestore
+    var db: FirebaseFirestore? = null
+    val nestedData2 = HashMap<String, Any>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +47,12 @@ class HomeFragment : MainBaseFragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         v = inflater!!.inflate(R.layout.home_fragment, container, false)
 
         firebaseFirestore = FirebaseFirestore.getInstance()
+        db = FirebaseFirestore.getInstance();
 
         initView(v)
 
@@ -66,21 +73,26 @@ class HomeFragment : MainBaseFragment() {
 
             for (doc in documentSnapshots) {
 
-                val name = doc.getString("name")
-                val personAge = doc.getString("personAge")
-                val personDistance = doc.getString("personDistance")
-                val personId = doc.getString("personId")
-                val personImg = doc.getString("personImg")
-                val personLocationName = doc.getString("personLocationName")
+                if (doc.id!= AppConstants.userId) {
 
-                radarModelArrayList.add(RadarModel(personId, "", personImg, name, personAge, "", personDistance, personLocationName))
+                    val name = doc.getString("name")
+                    val personAge = doc.getString("personAge")
+                    val personDistance = doc.getString("personDistance")
+                    val personId = doc.getString("personId")
+                    val personImg = doc.getString("personImg")
+                    val personLocationName = doc.getString("personLocationName")
+
+                    radarModelArrayList.add(RadarModel(doc.id, "", personImg, name, personAge, "", personDistance, personLocationName))
+
+                }
             }
 
             if (context != null) {
-                radarAdapter = RadarAdapter(context, radarModelArrayList)
+                radarAdapter = RadarAdapter(context!!, radarModelArrayList)
+                gridView_Radar.adapter = radarAdapter
+
             }
 
-            gridView_Radar.adapter = radarAdapter
         }
 
 
@@ -91,6 +103,12 @@ class HomeFragment : MainBaseFragment() {
         //GridView
         gridView_Radar = v.findViewById(R.id.gridView_Radar)
         gridView_Radar.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+
+
+            AppConstants.userDetailsId = radarModelArrayList.get(i).personId
+
+
+
             val ii = Intent(Activity, PersonDetailsActivity::class.java)
             startActivity(ii)
         }

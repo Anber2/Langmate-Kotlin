@@ -3,6 +3,7 @@ package com.langmate.langmate.Utilities
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.langmate.langmate.AppConstants.AppConstants
 
 /**
  * Created by HP on 2/27/2018.
@@ -10,39 +11,43 @@ import android.preference.PreferenceManager
 
 public class SharedPrefsUtils {
 
-    private val TAG = "PreferenceUtil"
-    lateinit var sp: SharedPreferences
 
-    private val IS_USER_SIGNED_IN = "is_user_signed_in"
 
     companion object {
 
         lateinit var sp: SharedPreferences
-        private val IS_USER_SIGNED_IN = "is_user_signed_in"
+        private val userDocId_:String = "userDocId_"
+        private val userName_:String = "userName_"
 
-        fun setUserSignedIn(context: Context, signed_in: Boolean) {
+
+
+
+
+        fun setUserDocId(context: Context, userDocId: String) {
             sp = PreferenceManager.getDefaultSharedPreferences(context)
-            sp.edit().putBoolean(IS_USER_SIGNED_IN, signed_in).apply()
+            sp.edit().putString(userDocId_, userDocId).apply()
 
         }
 
-        fun isUserSignedIn(context: Context): Boolean {
+        fun getUserDocId(context: Context): String {
             sp = PreferenceManager.getDefaultSharedPreferences(context)
-            return sp.getBoolean(IS_USER_SIGNED_IN, false)
+            return sp.getString(userDocId_, AppConstants.userId)
+        }
+
+        fun setUserName(context: Context, userDocId: String) {
+            sp = PreferenceManager.getDefaultSharedPreferences(context)
+            sp.edit().putString(userName_, userDocId).apply()
+
+        }
+
+        fun getUserName(context: Context): String {
+            sp = PreferenceManager.getDefaultSharedPreferences(context)
+            return sp.getString(userName_, AppConstants.userName)
         }
 
 
     }
 
 
-    fun setUserSignedIn(context: Context, signed_in: Boolean) {
-        sp = PreferenceManager.getDefaultSharedPreferences(context)
-        sp.edit().putBoolean(IS_USER_SIGNED_IN, signed_in).apply()
 
-    }
-
-    fun isUserSignedIn(context: Context): Boolean {
-        sp = PreferenceManager.getDefaultSharedPreferences(context)
-        return sp.getBoolean(IS_USER_SIGNED_IN, false)
-    }
 }

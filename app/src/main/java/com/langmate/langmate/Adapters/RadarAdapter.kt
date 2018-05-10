@@ -75,7 +75,10 @@ class RadarAdapter(internal var context: Context, //
 
 
 
-        Picasso.with(this.context).load(radarModelArrayList[i].personImg).into(vh.personImg)
+        try {
+            Picasso.with(this.context).load(radarModelArrayList[i].personImg).placeholder(R.drawable.cat).into(vh.personImg)
+        } catch (e: Exception) {
+        }
 
 
 

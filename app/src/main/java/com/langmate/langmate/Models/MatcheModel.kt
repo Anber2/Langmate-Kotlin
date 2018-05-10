@@ -5,4 +5,4 @@ package com.langmate.langmate.Models
  */
 
 class MatcheModel(
-        var docId: String, var matchId: String, var matchName: String, var matchAge: String, var matchDistance: String, var matchImg: String, var matchLocationName: String , var isLike: String)
+        var docId: String, var matchId: String, var matchName: String, var matchAge: String, var matchDistance: String, var matchImg: String, var matchLocationName: String )

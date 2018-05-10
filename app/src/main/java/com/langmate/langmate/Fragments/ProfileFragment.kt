@@ -10,6 +10,8 @@ import com.langmate.langmate.Models.RadarModel
 import com.langmate.langmate.R
 import java.util.*
 
+
+
 /**
  * Created by HP on 3/1/2018.
  */
@@ -27,14 +29,18 @@ class ProfileFragment : MainBaseFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater , container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         v = inflater!!.inflate(R.layout.profile_fragment, container, false)
 
 
         MainActivity.topBar_txt.visibility = View.INVISIBLE
 
+
+
+
         return v
     }
+
+
 }

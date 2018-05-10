@@ -1,5 +1,7 @@
 package com.langmate.langmate.Fragments
 
+
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +15,7 @@ import java.util.*
 /**
  * Created by HP on 3/1/2018.
  */
-class ChatsFragment  : MainBaseFragment() {
+class ChatsFragment : MainBaseFragment() {
 
     internal lateinit var v: View
 
@@ -25,36 +27,24 @@ class ChatsFragment  : MainBaseFragment() {
     internal var chatsModel: ChatsModel? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         v = inflater!!.inflate(R.layout.chats_fragment, container, false)
 
-        chatsListView = v.findViewById(R.id.chatsListView)
+      chatsListView = v.findViewById(R.id.list_of_chat_rooms)
 
 
-        getChatItems()
+
+
 
 
 
         return v
     }
 
-    private fun getChatItems() {
-        chatsModelArrayList = ArrayList()
-
-        chatsModelArrayList.add(ChatsModel("0", "", "Name 1", "Hi ....", "10 AM" ))
-        chatsModelArrayList.add(ChatsModel("1", "", "Name 2", "Hello ...", "12 PM" ))
-        chatsModelArrayList.add(ChatsModel("2", "", "Name 3", "message", "2 PM" ))
 
 
 
-        chatsAdapter = ChatsAdapter( chatsModelArrayList, context)
 
-        chatsListView.adapter = chatsAdapter
-     }
 }

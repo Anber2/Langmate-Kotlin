@@ -40,7 +40,7 @@ class RadarFragment : MainBaseFragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater , container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         v = inflater!!.inflate(R.layout.home_fragment, container, false)
@@ -84,7 +84,7 @@ class RadarFragment : MainBaseFragment() {
         radarModelArrayList.add(new RadarModel("4", "", "", "Name 5", "40", "", "20 mi", "(Tokyo)"));*/
 
 
-        radarAdapter = RadarAdapter(context, radarModelArrayList)
+        radarAdapter = RadarAdapter(this!!.context!!, radarModelArrayList)
 
         gridView_Radar.adapter = radarAdapter
 

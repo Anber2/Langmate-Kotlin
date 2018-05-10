@@ -1,7 +1,6 @@
 package com.langmate.langmate.Adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -75,7 +74,7 @@ class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAda
             holder.like.setOnClickListener {
                 MainActivity.koloda.onClickRight()
 
-                MainActivity.UpdateLikeUser(getItem(position).docId);
+                MainActivity.UpdateLikeUser(getItem(position).docId!!);
             }
 
         } catch (e: Exception) {
@@ -110,10 +109,10 @@ class MatchAdapter(val context: Context, val data: List<MatcheModel>?) : BaseAda
             matchCity.setText(data.matchLocationName)
 
 
-            if (data.isLike.equals("true")) {
+           /* if (data.isLike.equals("true")) {
 
                 like.setBackgroundColor(Color.RED)
-            }
+            }*/
 
 
         }
